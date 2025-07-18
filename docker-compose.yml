@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: backend-middleware-api
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=development  
+    volumes:
+      - ./backend:/app
+    restart: always
+
+  frontend:
+    build: ./frontend
+    container_name: frontend-middleware-api
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+    restart: always  
